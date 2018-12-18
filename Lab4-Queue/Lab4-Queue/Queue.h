@@ -16,6 +16,9 @@ public:
 	T FirstElem() const;
 	T LastElem()const;
 	void Clear();
+	int GetMaxSize();
+	int GetSize();
+	int GetFirst();
 
 };
 
@@ -71,7 +74,7 @@ void TQueue <T>::Push(const T elem)
 		last = 0;
 	else
 		last++;
-	ord[last] = elem;
+	mas[last] = elem;
 	Size++;
 }
 template <class T>
@@ -89,7 +92,7 @@ template <class T>
 T TQueue <T>::FirstElem() const
 {
 	if (IsEmpty())
-		throw "queue is empty";
+		throw "Queue is empty";
 	return mas[first];
 }
 template <class T>
@@ -106,4 +109,19 @@ void TQueue<T>::Clear()
 	last = -1;
 	Size = 0;
 
+}
+template <class T>
+int TQueue<T>::GetMaxSize()
+{
+	return MaxSize;
+}
+template <class T>
+int TQueue<T>::GetSize()
+{
+	return Size;
+}
+template <class T>
+int TQueue<T>::GetFirst()
+{
+	return first;
 }
