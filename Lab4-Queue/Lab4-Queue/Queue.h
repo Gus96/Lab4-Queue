@@ -19,7 +19,10 @@ public:
 	int GetMaxSize();
 	int GetSize();
 	int GetFirst();
-
+	TQueue operator =(const TQueue  &queue);
+	bool operator==(const TQueue <T> &queue) const;
+	T WhoIsFirst() const;
+	T WhoIsLast()const;
 };
 
 template <class T>
@@ -124,4 +127,42 @@ template <class T>
 int TQueue<T>::GetFirst()
 {
 	return first;
+}
+template <class T>
+TQueue <T> TQueue <T>::operator=(const TQueue <T> &queue)
+{
+	if (MaxSize != queue.MaxSize)
+	{
+		delete[] mas;
+		mas = new T[queue.MaxSize];
+	}
+	MaxSize = queue.MaxSize;
+	first = queue.first;
+	last = queue.last;
+	Size = queue.Size;
+	for (int i = 0; i < MaxSize; i++)
+		mas[i] = queue.mas[i];
+	return *this;
+}
+template <class T>
+bool TQueue <T>::operator==(const TQueue  &queue) const
+{
+	if (!(MaxSize == queue.MaxSize && Size == queue.Size && first == queue.first && last && queue.last))
+		return false;
+	for (int i = 0; i < MaxSize; i++)
+		if (mas[i] != queue.mas[i])
+			return false;
+	return true;
+}
+template <class T>
+T TQueue <T>::WhoIsFirst() const
+{
+	if (IsEmpty())
+		throw "Queue is empty";
+	return mas[first];
+}
+template <class T>
+T TQueue <T>::WhoIsLast() const
+{
+	return mas[last];
 }
